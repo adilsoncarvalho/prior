@@ -1,0 +1,202 @@
+gcloud preview app deploy app.yml
+You are about to deploy the following modules:
+ - myproject-142119/prior (from [/Users/adilson/dev/prior/app.yml])
+     Deployed URL: [https://prior-dot-myproject-142119.appspot.com]
+
+Do you want to continue (Y/n)?  Y
+
+Beginning deployment...
+If this is your first deployment, this may take a while...done.
+
+Verifying that Managed VMs are enabled and ready.
+Building and pushing image for module [prior]
+Started cloud build [545c686c-e177-41fe-85e3-88a2da7ff496].
+To see logs in the Cloud Console: https://console.developers.google.com/logs?project=myproject-142119&service=cloudbuild.googleapis.com&key1=545c686c-e177-41fe-85e3-88a2da7ff496&logName=projects/myproject-142119/logs/cloudbuild
+---------------------------------------------------------------------------- REMOTE BUILD OUTPUT -----------------------------------------------------------------------------
+starting build "545c686c-e177-41fe-85e3-88a2da7ff496"
+
+FETCHSOURCE
+Fetching storage object: gs://staging.myproject-142119.appspot.com/myproject-142119.prior.20160409t220100#1460250145455000
+Copying gs://staging.myproject-142119.appspot.com/myproject-142119.prior.20160409t220100#1460250145455000...
+Downloading file:///tmp/source-archive.tgz:                      620 B/620 B
+FETCHBUILDER
+BUILD
+Client:
+ Version:      1.9.1
+ API version:  1.21
+ Go version:   go1.4.3
+ Git commit:   a34a1d5
+ Built:        Fri Nov 20 17:56:04 UTC 2015
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      1.9.1
+ API version:  1.21
+ Go version:   go1.4.2
+ Git commit:   a34a1d5
+ Built:        Fri Nov 20 13:12:04 UTC 2015
+ OS/Arch:      linux/amd64
+Sending build context to Docker daemon  5.12 kB
+Step 1 : FROM ruby:2.3-alpine
+2.3-alpine: Pulling from library/ruby
+b66121b7b9c0: Pulling fs layer
+7d55b1dbb4c7: Pulling fs layer
+163f7469c9c5: Pulling fs layer
+fb87735cf65d: Pulling fs layer
+3e21d47a280d: Pulling fs layer
+0c9eb5f44349: Pulling fs layer
+5e8610c4f3eb: Pulling fs layer
+308b9354639f: Pulling fs layer
+296ace3114ec: Pulling fs layer
+39b06f309b07: Pulling fs layer
+d008010e83cc: Pulling fs layer
+8c9e93ef9e47: Pulling fs layer
+4408f1fab3a3: Pulling fs layer
+adfa070efe1d: Pulling fs layer
+0c9eb5f44349: Verifying Checksum
+0c9eb5f44349: Download complete
+163f7469c9c5: Verifying Checksum
+163f7469c9c5: Download complete
+d008010e83cc: Verifying Checksum
+d008010e83cc: Download complete
+308b9354639f: Verifying Checksum
+308b9354639f: Download complete
+fb87735cf65d: Verifying Checksum
+fb87735cf65d: Download complete
+3e21d47a280d: Verifying Checksum
+3e21d47a280d: Download complete
+adfa070efe1d: Verifying Checksum
+adfa070efe1d: Download complete
+8c9e93ef9e47: Verifying Checksum
+8c9e93ef9e47: Download complete
+39b06f309b07: Verifying Checksum
+39b06f309b07: Download complete
+4408f1fab3a3: Verifying Checksum
+4408f1fab3a3: Download complete
+7d55b1dbb4c7: Verifying Checksum
+7d55b1dbb4c7: Download complete
+296ace3114ec: Verifying Checksum
+296ace3114ec: Download complete
+b66121b7b9c0: Verifying Checksum
+b66121b7b9c0: Download complete
+b66121b7b9c0: Pull complete
+7d55b1dbb4c7: Pull complete
+163f7469c9c5: Pull complete
+fb87735cf65d: Pull complete
+3e21d47a280d: Pull complete
+0c9eb5f44349: Pull complete
+5e8610c4f3eb: Verifying Checksum
+5e8610c4f3eb: Download complete
+5e8610c4f3eb: Pull complete
+308b9354639f: Pull complete
+296ace3114ec: Pull complete
+39b06f309b07: Pull complete
+d008010e83cc: Pull complete
+8c9e93ef9e47: Pull complete
+4408f1fab3a3: Pull complete
+adfa070efe1d: Pull complete
+Digest: sha256:cb9cfabd93faf2a8b552c42900e318b428603b045e206b536a81c62af2e5643b
+Status: Downloaded newer image for ruby:2.3-alpine
+ ---> adfa070efe1d
+Step 2 : RUN mkdir /app
+ ---> Running in 89784b29866e
+ ---> 624e706e68f6
+Removing intermediate container 89784b29866e
+Step 3 : WORKDIR /app
+ ---> Running in 79f45e9135af
+ ---> f3a4f17ce894
+Removing intermediate container 79f45e9135af
+Step 4 : ADD . /app
+ ---> 3197ffd6d5d2
+Removing intermediate container 333a0b4bc477
+Step 5 : RUN bundle install  --jobs 20 --retry 5
+ ---> Running in 00f6c4bb18ff
+Fetching gem metadata from https://rubygems.org/...........
+Fetching version metadata from https://rubygems.org/..
+Resolving dependencies...
+Using bundler 1.11.2
+Installing tilt 2.0.2
+Installing rack 1.6.4
+Installing rack-protection 1.5.3
+Installing sinatra 1.4.7
+Bundle complete! 1 Gemfile dependency, 5 gems now installed.
+Bundled gems are installed into /usr/local/bundle.
+ ---> 57a96af04f9a
+Removing intermediate container 00f6c4bb18ff
+Step 6 : RUN chmod +x web.rb
+ ---> Running in f9c9b216276e
+ ---> a71a7dea4276
+Removing intermediate container f9c9b216276e
+Step 7 : ENV RACK_ENV production
+ ---> Running in 60d1eec9426b
+ ---> c5af003a8740
+Removing intermediate container 60d1eec9426b
+Step 8 : ENV BOGUS_NAME stanger
+ ---> Running in 07a6f468c393
+ ---> 250ae2c18cf0
+Removing intermediate container 07a6f468c393
+Step 9 : EXPOSE 8080
+ ---> Running in 002b84c3e53a
+ ---> 895f58574460
+Removing intermediate container 002b84c3e53a
+Step 10 : CMD /app/web.rb -o 0.0.0.0 -p 8080
+ ---> Running in 900b4fdc8f5b
+ ---> 8e6eb0dd2a94
+Removing intermediate container 900b4fdc8f5b
+Successfully built 8e6eb0dd2a94
+PUSH
+The push refers to a repository [appengine.gcr.io/gcloud/myproject-142119.prior.20160409t220100] (len: 1)
+Sending image list
+Pushing repository appengine.gcr.io/gcloud/myproject-142119.prior.20160409t220100 (1 tags)
+b66121b7b9c0: Pushing
+b66121b7b9c0: Image successfully pushed
+7d55b1dbb4c7: Pushing
+7d55b1dbb4c7: Image successfully pushed
+163f7469c9c5: Pushing
+163f7469c9c5: Image successfully pushed
+fb87735cf65d: Pushing
+fb87735cf65d: Image successfully pushed
+3e21d47a280d: Pushing
+3e21d47a280d: Image successfully pushed
+0c9eb5f44349: Pushing
+0c9eb5f44349: Image successfully pushed
+5e8610c4f3eb: Pushing
+5e8610c4f3eb: Image successfully pushed
+308b9354639f: Pushing
+308b9354639f: Image successfully pushed
+296ace3114ec: Pushing
+296ace3114ec: Image successfully pushed
+39b06f309b07: Pushing
+39b06f309b07: Image successfully pushed
+d008010e83cc: Pushing
+d008010e83cc: Image successfully pushed
+8c9e93ef9e47: Pushing
+8c9e93ef9e47: Image successfully pushed
+4408f1fab3a3: Pushing
+4408f1fab3a3: Image successfully pushed
+adfa070efe1d: Pushing
+adfa070efe1d: Image successfully pushed
+624e706e68f6: Pushing
+624e706e68f6: Image successfully pushed
+f3a4f17ce894: Pushing
+f3a4f17ce894: Image successfully pushed
+3197ffd6d5d2: Pushing
+3197ffd6d5d2: Image successfully pushed
+57a96af04f9a: Pushing
+57a96af04f9a: Image successfully pushed
+a71a7dea4276: Pushing
+a71a7dea4276: Image successfully pushed
+c5af003a8740: Pushing
+c5af003a8740: Image successfully pushed
+250ae2c18cf0: Pushing
+250ae2c18cf0: Image successfully pushed
+895f58574460: Pushing
+895f58574460: Image successfully pushed
+8e6eb0dd2a94: Pushing
+8e6eb0dd2a94: Image successfully pushed
+Pushing tag for rev [8e6eb0dd2a94] on {https://appengine.gcr.io/v1/repositories/gcloud/myproject-142119.prior.20160409t220100/tags/latest}
+DONE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Updating module [prior]...done.
+Deployed module [prior] to [https://prior-dot-myproject-142119.appspot.com]
